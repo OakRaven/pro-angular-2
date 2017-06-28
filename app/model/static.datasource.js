@@ -8,12 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var Observable_1 = require('rxjs/Observable');
-var product_model_1 = require('./product.model');
+const core_1 = require('@angular/core');
+const Observable_1 = require('rxjs/Observable');
+const product_model_1 = require('./product.model');
 require('rxjs/add/observable/from');
-var StaticDataSource = (function () {
-    function StaticDataSource() {
+let StaticDataSource = class StaticDataSource {
+    constructor() {
         this.products = [
             new product_model_1.Product(1, "Product 1", "Category 1", "Product 1 (Category 1)", 100),
             new product_model_1.Product(2, "Product 2", "Category 1", "Product 2 (Category 1)", 100),
@@ -32,13 +32,12 @@ var StaticDataSource = (function () {
             new product_model_1.Product(15, "Product 15", "Category 3", "Product 15 (Category 3)", 100),
         ];
     }
-    StaticDataSource.prototype.getProducts = function () {
+    getProducts() {
         return Observable_1.Observable.from([this.products]);
-    };
-    StaticDataSource = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], StaticDataSource);
-    return StaticDataSource;
-}());
+    }
+};
+StaticDataSource = __decorate([
+    core_1.Injectable(), 
+    __metadata('design:paramtypes', [])
+], StaticDataSource);
 exports.StaticDataSource = StaticDataSource;

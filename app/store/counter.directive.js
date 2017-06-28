@@ -8,34 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var CounterDirective = (function () {
-    function CounterDirective(container, template) {
+const core_1 = require('@angular/core');
+let CounterDirective = class CounterDirective {
+    constructor(container, template) {
         this.container = container;
         this.template = template;
     }
-    CounterDirective.prototype.ngOnChanges = function (changes) {
+    ngOnChanges(changes) {
         this.container.clear();
-        for (var i = 0; i < this.counter; i++) {
+        for (let i = 0; i < this.counter; i++) {
             this.container.createEmbeddedView(this.template, new CounterDirectiveContext(i + 1));
         }
-    };
-    __decorate([
-        core_1.Input('counterOf'), 
-        __metadata('design:type', Number)
-    ], CounterDirective.prototype, "counter", void 0);
-    CounterDirective = __decorate([
-        core_1.Directive({
-            selector: '[counterOf]'
-        }), 
-        __metadata('design:paramtypes', [core_1.ViewContainerRef, core_1.TemplateRef])
-    ], CounterDirective);
-    return CounterDirective;
-}());
+    }
+};
+__decorate([
+    core_1.Input('counterOf'), 
+    __metadata('design:type', Number)
+], CounterDirective.prototype, "counter", void 0);
+CounterDirective = __decorate([
+    core_1.Directive({
+        selector: '[counterOf]'
+    }), 
+    __metadata('design:paramtypes', [core_1.ViewContainerRef, core_1.TemplateRef])
+], CounterDirective);
 exports.CounterDirective = CounterDirective;
-var CounterDirectiveContext = (function () {
-    function CounterDirectiveContext($implicit) {
+class CounterDirectiveContext {
+    constructor($implicit) {
         this.$implicit = $implicit;
     }
-    return CounterDirectiveContext;
-}());
+}
