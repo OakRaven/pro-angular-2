@@ -9,13 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require("@angular/core");
-let AppComponent = class AppComponent {
+let CheckoutComponent = class CheckoutComponent {
+    constructor() {
+    }
+    ngOnInit() { }
 };
-AppComponent = __decorate([
+CheckoutComponent = __decorate([
     core_1.Component({
-        selector: "app",
-        template: "<router-outlet></router-outlet>"
+        template: `<div><h3 class="bg-info p-a-1">Checkout Component</h3></div>`
     }), 
     __metadata('design:paramtypes', [])
-], AppComponent);
-exports.AppComponent = AppComponent;
+], CheckoutComponent);
+exports.CheckoutComponent = CheckoutComponent;

@@ -9,13 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require("@angular/core");
-let AppComponent = class AppComponent {
+const router_1 = require("@angular/router");
+const store_component_1 = require("./store/store.component");
+let StoreFirstGuard = class StoreFirstGuard {
+    constructor(router) {
+        this.router = router;
+        this.firstNavigation = true;
+    }
+    canActivate(route, state) {
+        if (this.firstNavigation) {
+            this.firstNavigation = false;
+            if (route.component !== store_component_1.StoreComponent) {
+                this.router.navigateByUrl("/");
+                return false;
+            }
+        }
+        return true;
+    }
 };
-AppComponent = __decorate([
-    core_1.Component({
-        selector: "app",
-        template: "<router-outlet></router-outlet>"
-    }), 
-    __metadata('design:paramtypes', [])
-], AppComponent);
-exports.AppComponent = AppComponent;
+StoreFirstGuard = __decorate([
+    core_1.Injectable(), 
+    __metadata('design:paramtypes', [router_1.Router])
+], StoreFirstGuard);
+exports.StoreFirstGuard = StoreFirstGuard;
