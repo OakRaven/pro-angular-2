@@ -14,9 +14,10 @@ const forms_1 = require("@angular/forms");
 const router_1 = require("@angular/router");
 const auth_component_1 = require("./auth.component");
 const admin_component_1 = require("./admin.component");
+const auth_guard_1 = require("./auth.guard");
 let routing = router_1.RouterModule.forChild([
     { path: "auth", component: auth_component_1.AuthComponent },
-    { path: "main", component: admin_component_1.AdminComponent },
+    { path: "main", component: admin_component_1.AdminComponent, canActivate: [auth_guard_1.AuthGuard] },
     { path: "**", redirectTo: "auth" }
 ]);
 let AdminModule = class AdminModule {
@@ -24,6 +25,7 @@ let AdminModule = class AdminModule {
 AdminModule = __decorate([
     core_1.NgModule({
         imports: [common_1.CommonModule, forms_1.FormsModule, routing],
+        providers: [auth_guard_1.AuthGuard],
         declarations: [auth_component_1.AuthComponent, admin_component_1.AdminComponent]
     }), 
     __metadata('design:paramtypes', [])

@@ -11,30 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = require("@angular/core");
 const router_1 = require("@angular/router");
 const auth_service_1 = require("../model/auth.service");
-let AuthComponent = class AuthComponent {
+let AuthGuard = class AuthGuard {
     constructor(router, auth) {
         this.router = router;
         this.auth = auth;
     }
-    authenticate(form) {
-        if (form.valid) {
-            this.auth.authenticate(this.username, this.password).subscribe(response => {
-                if (response) {
-                    this.router.navigateByUrl("/admin/main");
-                }
-                this.errorMessage = "Authentication Failed";
-            });
+    canActivate(route, state) {
+        if (!this.auth.authenticated) {
+            this.router.navigateByUrl("/admin/auth");
+            return false;
         }
-        else {
-            this.errorMessage = "Form Data Invalid";
-        }
+        return true;
     }
 };
-AuthComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        templateUrl: "auth.component.html"
-    }), 
+AuthGuard = __decorate([
+    core_1.Injectable(), 
     __metadata('design:paramtypes', [router_1.Router, auth_service_1.AuthService])
-], AuthComponent);
-exports.AuthComponent = AuthComponent;
+], AuthGuard);
+exports.AuthGuard = AuthGuard;

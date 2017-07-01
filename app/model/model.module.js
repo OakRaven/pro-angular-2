@@ -16,6 +16,7 @@ const cart_model_1 = require('./cart.model');
 const order_model_1 = require("./order.model");
 const order_repository_1 = require("./order.repository");
 const rest_datasource_1 = require("./rest.datasource");
+const auth_service_1 = require("./auth.service");
 let ModelModule = class ModelModule {
 };
 ModelModule = __decorate([
@@ -26,7 +27,9 @@ ModelModule = __decorate([
             cart_model_1.Cart,
             order_model_1.Order,
             order_repository_1.OrderRepository,
-            { provide: static_datasource_1.StaticDataSource, useClass: rest_datasource_1.RestDataSource }]
+            { provide: static_datasource_1.StaticDataSource, useClass: rest_datasource_1.RestDataSource },
+            rest_datasource_1.RestDataSource,
+            auth_service_1.AuthService]
     }), 
     __metadata('design:paramtypes', [])
 ], ModelModule);

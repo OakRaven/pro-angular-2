@@ -18,18 +18,33 @@ let RestDataSource = class RestDataSource {
         this.http = http;
         this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
     }
+    authenicate(user, pass) {
+        return this.http.request(new http_1.Request({
+            method: http_1.RequestMethod.Post,
+            url: this.baseUrl + "login",
+            body: { name: user, password: pass }
+        })).map(response => {
+            let r = response.json();
+            this.auth_token = r.success ? r.token : null;
+            return r.success;
+        });
+    }
     getProducts() {
         return this.sendRequest(http_1.RequestMethod.Get, "products");
     }
     saveOrder(order) {
         return this.sendRequest(http_1.RequestMethod.Post, "orders", order);
     }
-    sendRequest(verb, url, body) {
-        return this.http.request(new http_1.Request({
+    sendRequest(verb, url, body, auth = false) {
+        let request = new http_1.Request({
             method: verb,
             url: this.baseUrl + url,
             body: body
-        })).map(response => response.json());
+        });
+        if (auth && this.auth_token != null) {
+            request.headers.set("Authorization", `Bearer<${this.auth_token}>`);
+        }
+        return this.http.request(request).map(response => response.json());
     }
 };
 RestDataSource = __decorate([
