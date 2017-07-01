@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 const core_1 = require('@angular/core');
 const Observable_1 = require('rxjs/Observable');
-const product_model_1 = require('./product.model');
 require('rxjs/add/observable/from');
+const product_model_1 = require('./product.model');
 let StaticDataSource = class StaticDataSource {
     constructor() {
         this.products = [
@@ -34,6 +34,10 @@ let StaticDataSource = class StaticDataSource {
     }
     getProducts() {
         return Observable_1.Observable.from([this.products]);
+    }
+    saveOrder(order) {
+        console.log(JSON.stringify(order));
+        return Observable_1.Observable.from([order]);
     }
 };
 StaticDataSource = __decorate([
