@@ -9,23 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require("@angular/core");
-const router_1 = require("@angular/router");
-const auth_service_1 = require("../model/auth.service");
-let AdminComponent = class AdminComponent {
-    constructor(auth, router) {
-        this.auth = auth;
-        this.router = router;
+const product_repository_1 = require("../model/product.repository");
+let ProductTableComponent = class ProductTableComponent {
+    constructor(repository) {
+        this.repository = repository;
     }
-    logout() {
-        this.auth.clear();
-        this.router.navigateByUrl("/");
+    getProducts() {
+        return this.repository.getProducts();
+    }
+    deleteProduct(id) {
+        this.repository.deleteProduct(id);
     }
 };
-AdminComponent = __decorate([
+ProductTableComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        templateUrl: "admin.component.html"
+        templateUrl: "productTable.component.html"
     }), 
-    __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
-], AdminComponent);
-exports.AdminComponent = AdminComponent;
+    __metadata('design:paramtypes', [product_repository_1.ProductRepository])
+], ProductTableComponent);
+exports.ProductTableComponent = ProductTableComponent;

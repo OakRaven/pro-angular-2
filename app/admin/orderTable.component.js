@@ -9,23 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require("@angular/core");
-const router_1 = require("@angular/router");
-const auth_service_1 = require("../model/auth.service");
-let AdminComponent = class AdminComponent {
-    constructor(auth, router) {
-        this.auth = auth;
-        this.router = router;
+const order_repository_1 = require("../model/order.repository");
+let OrderTableComponent = class OrderTableComponent {
+    constructor(repository) {
+        this.repository = repository;
+        this.includeShipped = false;
     }
-    logout() {
-        this.auth.clear();
-        this.router.navigateByUrl("/");
+    getOrders() {
+        return this.repository.getOrders()
+            .filter(o => this.includeShipped || !o.shipped);
+    }
+    markShipped(order) {
+        order.shipped = true;
+        this.repository.updateOrder(order);
+    }
+    delete(id) {
+        this.repository.deleteOrder(id);
     }
 };
-AdminComponent = __decorate([
+OrderTableComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
-        templateUrl: "admin.component.html"
+        templateUrl: "orderTable.component.html"
     }), 
-    __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
-], AdminComponent);
-exports.AdminComponent = AdminComponent;
+    __metadata('design:paramtypes', [order_repository_1.OrderRepository])
+], OrderTableComponent);
+exports.OrderTableComponent = OrderTableComponent;
