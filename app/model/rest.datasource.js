@@ -32,6 +32,24 @@ let RestDataSource = class RestDataSource {
     getProducts() {
         return this.sendRequest(http_1.RequestMethod.Get, "products");
     }
+    saveProduct(product) {
+        return this.sendRequest(http_1.RequestMethod.Post, "products", product, true);
+    }
+    updateProduct(product) {
+        return this.sendRequest(http_1.RequestMethod.Put, `products/${product.id}`, product, true);
+    }
+    deleteProduct(id) {
+        return this.sendRequest(http_1.RequestMethod.Delete, `products/${id}`, null, true);
+    }
+    getOrders() {
+        return this.sendRequest(http_1.RequestMethod.Get, "orders", null, true);
+    }
+    deleteOrder(id) {
+        return this.sendRequest(http_1.RequestMethod.Delete, `orders/${id}`, null, true);
+    }
+    updateOrder(order) {
+        return this.sendRequest(http_1.RequestMethod.Put, `orders/${order.id}`, order, true);
+    }
     saveOrder(order) {
         return this.sendRequest(http_1.RequestMethod.Post, "orders", order);
     }
