@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-const core_1 = require('@angular/core');
+const core_1 = require("@angular/core");
 let Cart = class Cart {
     constructor() {
         this.lines = [];
@@ -26,7 +26,7 @@ let Cart = class Cart {
         this.recalculate();
     }
     updateQuantity(product, quantity) {
-        let line = this.lines.find(line => line.product.id == product.id);
+        let line = this.lines.find(line => line.product.id === product.id);
         if (line !== undefined) {
             line.quantity = Number(quantity);
         }
@@ -34,7 +34,7 @@ let Cart = class Cart {
     }
     removeLine(id) {
         let index = this.lines.findIndex(line => line.product.id === id);
-        this.lines.splice(index);
+        this.lines.splice(index, 1);
         this.recalculate();
     }
     clear() {

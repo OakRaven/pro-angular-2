@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Product } from './product.model';
+import { Injectable } from "@angular/core";
+import { Product } from "./product.model";
 
 @Injectable()
 export class Cart {
@@ -7,8 +7,8 @@ export class Cart {
     public itemCount: number = 0;
     public cartPrice: number = 0;
 
-    addLine(product: Product, quantity: number = 1) {
-        let line = this.lines.find(line => line.product.id === product.id);
+    addLine(product: Product, quantity: number = 1): void {
+        let line: CartLine = this.lines.find(line => line.product.id === product.id);
         if (line !== undefined) {
             line.quantity += quantity;
         } else {
@@ -19,7 +19,7 @@ export class Cart {
     }
 
     updateQuantity(product: Product, quantity: number): void {
-        let line = this.lines.find(line => line.product.id == product.id);
+        let line: CartLine = this.lines.find(line => line.product.id === product.id);
         if (line !== undefined) {
             line.quantity = Number(quantity);
         }
@@ -28,8 +28,8 @@ export class Cart {
     }
 
     removeLine(id: number): void {
-        let index = this.lines.findIndex(line => line.product.id === id);
-        this.lines.splice(index);
+        let index: number = this.lines.findIndex(line => line.product.id === id);
+        this.lines.splice(index, 1);
         this.recalculate();
     }
 
